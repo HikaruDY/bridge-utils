@@ -10,6 +10,7 @@ bindir=@bindir@
 sbindir=@sbindir@
 mandir=@mandir@
 distdir = $(PACKAGE)-$(VERSION)
+datarootdir=@datarootdir@
 
 SUBDIRS=libbridge brctl doc
 

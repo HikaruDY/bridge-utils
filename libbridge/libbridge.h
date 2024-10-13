@@ -19,6 +19,8 @@
 #ifndef _LIBBRIDGE_H
 #define _LIBBRIDGE_H
 
+#include <limits.h>
+
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/time.h>

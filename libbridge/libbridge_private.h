@@ -19,7 +19,7 @@
 #ifndef _LIBBRIDGE_PRIVATE_H
 #define _LIBBRIDGE_PRIVATE_H
 
-#include "config.h"
+#include <config.h>
 
 #include <linux/sockios.h>
 #include <sys/time.h>

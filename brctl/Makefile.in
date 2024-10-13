@@ -4,14 +4,21 @@ KERNEL_HEADERS=-I@KERNEL_HEADERS@
 CC=@CC@
 CFLAGS= -Wall @CFLAGS@
 LDFLAGS=@LDFLAGS@
-INCLUDE=-I../libbridge $(KERNEL_HEADERS)
-LIBS= -L ../libbridge -lbridge @LIBS@
+INCLUDE=-I$(top_builddir)/libbridge -I$(top_srcdir)/libbridge $(KERNEL_HEADERS)
+LIBS= -L $(top_builddir)/libbridge -lbridge @LIBS@
 
 prefix=@prefix@
 exec_prefix=@exec_prefix@
 bindir=@bindir@
 sbindir=@sbindir@
 mandir=@mandir@
+datarootdir=@datarootdir@
+
+top_builddir=@top_builddir@
+builddir=@builddir@
+top_srcdir=@top_srcdir@
+srcdir=@srcdir@
+VPATH=@srcdir@
 
 INSTALL=@INSTALL@
 

@@ -14,12 +14,10 @@ AC_PROG_INSTALL
 AC_PROG_RANLIB
 
 dnl Checks for header files.
-AC_HEADER_STDC
 AC_CHECK_HEADERS(sys/ioctl.h sys/time.h)
 
 dnl Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
-AC_HEADER_TIME
 
 dnl Checks for library functions.
 AC_CHECK_FUNCS(gethostname socket strdup uname)
