@@ -44,7 +44,7 @@ int main(int argc, char *const* argv)
 		{ 0 }
 	};
 
-	while ((f = getopt_long(argc, argv, "Vh", options, NULL)) != EOF) 
+	while ((f = getopt_long(argc, argv, "Vh", options, NULL)) != EOF)
 		switch(f) {
 		case 'h':
 			help();
@@ -56,10 +56,10 @@ int main(int argc, char *const* argv)
 			fprintf(stderr, "Unknown option '%c'\n", f);
 			goto help;
 		}
-			
+
 	if (argc == optind)
 		goto help;
-	
+
 	if (br_init()) {
 		fprintf(stderr, "can't setup bridge control: %s\n",
 			strerror(errno));
@@ -72,7 +72,7 @@ int main(int argc, char *const* argv)
 		fprintf(stderr, "never heard of command [%s]\n", *argv);
 		goto help;
 	}
-	
+
 	if (argc < cmd->nargs + 1) {
 		printf("Incorrect number of arguments for command\n");
 		printf("Usage: brctl %s %s\n", cmd->name, cmd->help);

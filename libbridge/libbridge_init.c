@@ -56,7 +56,7 @@ static int isbridge(const struct dirent *entry)
 		    && entry->d_name[2] == '\0')))
 		return 0;
 
-	snprintf(path, PATH_MAX, 
+	snprintf(path, PATH_MAX,
 		 SYSFS_CLASS_NET "%s/bridge", entry->d_name);
 
 	/* Workaround old glibc breakage.
@@ -96,13 +96,13 @@ static int new_foreach_bridge(int (*iterator)(const char *name, void *),
 /*
  * Old interface uses ioctl
  */
-static int old_foreach_bridge(int (*iterator)(const char *, void *), 
+static int old_foreach_bridge(int (*iterator)(const char *, void *),
 			      void *iarg)
 {
 	int i, ret=0, num;
 	char ifname[IFNAMSIZ];
 	int ifindices[MAX_BRIDGES];
-	unsigned long args[3] = { BRCTL_GET_BRIDGES, 
+	unsigned long args[3] = { BRCTL_GET_BRIDGES,
 				 (unsigned long)ifindices, MAX_BRIDGES };
 
 	num = ioctl(br_socket_fd, SIOCGIFBR, args);
@@ -120,9 +120,9 @@ static int old_foreach_bridge(int (*iterator)(const char *, void *),
 		}
 
 		++ret;
-		if(iterator(ifname, iarg)) 
+		if(iterator(ifname, iarg))
 			break;
-		
+
 	}
 
 	return ret;
@@ -133,7 +133,7 @@ static int old_foreach_bridge(int (*iterator)(const char *, void *),
  * Go over all bridges and call iterator function.
  * if iterator returns non-zero then stop.
  */
-int br_foreach_bridge(int (*iterator)(const char *, void *), 
+int br_foreach_bridge(int (*iterator)(const char *, void *),
 		     void *arg)
 {
 	int ret;
@@ -145,11 +145,11 @@ int br_foreach_bridge(int (*iterator)(const char *, void *),
 	return ret;
 }
 
-/* 
+/*
  * Only used if sysfs is not available.
  */
 static int old_foreach_port(const char *brname,
-			    int (*iterator)(const char *br, const char *port, 
+			    int (*iterator)(const char *br, const char *port,
 					    void *arg),
 			    void *arg)
 {
@@ -189,7 +189,7 @@ static int old_foreach_port(const char *brname,
 
 	return count;
 }
-	
+
 /*
  * Iterate over all ports in bridge (using sysfs).
  */

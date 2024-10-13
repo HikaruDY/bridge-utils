@@ -18,6 +18,6 @@ do
 	brctl addif $BR $ETH0
 	brctl addif $BR $ETH1
 	ifconfig $BR $IP
-	
+
 	sleep 10
 done

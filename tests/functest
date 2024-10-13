@@ -19,7 +19,7 @@ echo "0. Creating  $maxports dummy devices"
 modprobe dummy numdummies=$maxports
 
 echo "1. Creating bridge $BR"
-brctl addbr $BR 
+brctl addbr $BR
 brctl stp $BR on
 
 echo "2. Add $ETH"
@@ -96,13 +96,13 @@ brctl delif brTmp $ETH
 brctl delbr brTmp
 
 echo -n "  remove bridge $ETH - "
-brctl delbr $ETH 
+brctl delbr $ETH
 
 echo -n "  remove bridge bogus - "
-brctl delbr bogus 
+brctl delbr bogus
 
 echo -n "  remove still active bridge - "
-brctl delbr $BR 
+brctl delbr $BR
 
 echo -n "  zero hw address - "
 ifconfig dummy0 hw ether 00:00:00:00:00:00
@@ -153,12 +153,12 @@ modprobe bridge
 sleep 1
 
 echo "33 Remove module with race"
-brctl addbr $BR 
+brctl addbr $BR
 ifconfig $BR 9.9.9.9
 
 rmmod --wait bridge &
 sleep 2
-brctl addbr brXX 
+brctl addbr brXX
 if ifconfig brXX 1.1.1.1 ; then
     echo "?? ifconfig succeeded"
     ifconfig brXX down
@@ -168,4 +168,3 @@ ifconfig $BR down
 wait
 
 echo "*** Done ***"
-
