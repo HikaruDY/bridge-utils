@@ -22,8 +22,8 @@
 #include <errno.h>
 #include <getopt.h>
 
-#include "libbridge.h"
-#include "config.h"
+#include <libbridge.h>
+#include <config.h>
 
 #include "brctl.h"
 

@@ -22,7 +22,8 @@
 #include <sys/time.h>
 #include <errno.h>
 #include <asm/param.h>
-#include "libbridge.h"
+
+#include <libbridge.h>
 #include "brctl.h"
 
 static int strtotimeval(struct timeval *tv, const char *time)

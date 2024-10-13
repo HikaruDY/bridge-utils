@@ -21,7 +21,7 @@
 #include <string.h>
 #include <sys/time.h>
 
-#include "libbridge.h"
+#include <libbridge.h>
 #include "brctl.h"
 
 void br_dump_bridge_id(const unsigned char *x)

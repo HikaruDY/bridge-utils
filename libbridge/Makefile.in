@@ -5,12 +5,19 @@ AR=ar
 RANLIB=@RANLIB@
 
 CC=@CC@
-CFLAGS = -Wall @CFLAGS@ $(KERNEL_HEADERS)
+CFLAGS = -Wall -I$(builddir) @CFLAGS@ $(KERNEL_HEADERS)
 
 prefix=@prefix@
 exec_prefix=@exec_prefix@
 includedir=@includedir@
 libdir=@libdir@
+datarootdir=@datarootdir@
+
+top_builddir=@top_builddir@
+builddir=@builddir@
+top_srcdir=@top_srcdir@
+srcdir=@srcdir@
+VPATH=@srcdir@
 
 libbridge_SOURCES= \
 	libbridge_devif.c \

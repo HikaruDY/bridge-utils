@@ -9,6 +9,13 @@ exec_prefix=@exec_prefix@
 bindir=@bindir@
 sbindir=@sbindir@
 mandir=@mandir@
+datarootdir=@datarootdir@
+
+top_builddir=@top_builddir@
+builddir=@builddir@
+top_srcdir=@top_srcdir@
+srcdir=@srcdir@
+VPATH=@srcdir@
 
 all:
 
@@ -16,4 +23,4 @@ clean:
 
 install:
 	mkdir -p $(DESTDIR)$(mandir)/man8
-	$(INSTALL) -m 644 brctl.8 $(DESTDIR)$(mandir)/man8
+	$(INSTALL) -m 644 $(srcdir)/brctl.8 $(DESTDIR)$(mandir)/man8
