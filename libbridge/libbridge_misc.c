@@ -26,10 +26,10 @@
 
 
 static const char *state_names[5] = {
-	[BR_STATE_DISABLED] = "disabled", 
-	[BR_STATE_LISTENING] = "listening", 
-	[BR_STATE_LEARNING] = "learning", 
-	[BR_STATE_FORWARDING] = "forwarding", 
+	[BR_STATE_DISABLED] = "disabled",
+	[BR_STATE_LISTENING] = "listening",
+	[BR_STATE_LEARNING] = "learning",
+	[BR_STATE_FORWARDING] = "forwarding",
 	[BR_STATE_BLOCKING] = "blocking",
 };
 

@@ -20,7 +20,7 @@ clean:
 	for x in $(SUBDIRS); do $(MAKE) $(MFLAGS) -C $$x clean ; done
 
 distclean:	clean
-	rm -f config.* 
+	rm -f config.*
 
 maintainer-clean: distclean
 	rm -f configure Makefile bridge-utils.spec
@@ -29,4 +29,3 @@ maintainer-clean: distclean
 
 install:
 	for x in $(SUBDIRS); do $(MAKE) $(MFLAGS) -C $$x install || exit 1 ; done
-

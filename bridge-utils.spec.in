@@ -73,4 +73,3 @@ install -m 644 libbridge/libbridge.a %{buildroot}%{_libdir}
 
 * Wed Nov 07 2001 Matthew Galgoci <mgalgoci@redhat.com>
 - initial cleanup of spec file from net release
-

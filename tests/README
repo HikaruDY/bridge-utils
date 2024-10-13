@@ -11,4 +11,3 @@ The stresstest needs two ethernets (eth0 and eth1).
 For highest stress, traffic should be sent over the bridge
 while the test is ongoing.  The goal is to exercise, races
 that occur when traffic is flowing while management operations occur.
-

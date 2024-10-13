@@ -40,7 +40,7 @@ static int first;
 static int dump_interface(const char *b, const char *p, void *arg)
 {
 
-	if (first) 
+	if (first)
 		first = 0;
 	else
 		printf("\n\t\t\t\t\t\t\t");

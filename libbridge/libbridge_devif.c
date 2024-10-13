@@ -57,7 +57,7 @@ static int fetch_int(const char *dev, const char *name)
 	FILE *f = fpopen(dev, name);
 	int value = -1;
 
-	if (!f) 
+	if (!f)
 		return 0;
 
 	fscanf(f, "%i", &value);
@@ -66,7 +66,7 @@ static int fetch_int(const char *dev, const char *name)
 }
 
 /* Get a time value out of sysfs */
-static void fetch_tv(const char *dev, const char *name, 
+static void fetch_tv(const char *dev, const char *name,
 		    struct timeval *tv)
 {
 	__jiffies_to_tv(tv, fetch_int(dev, name));
@@ -95,7 +95,7 @@ static int get_portno(const char *brname, const char *ifname)
 	ifr.ifr_data = (char *) &args;
 
 	if (ioctl(br_socket_fd, SIOCDEVPRIVATE, &ifr) < 0) {
-		dprintf("get_portno: get ports of %s failed: %s\n", 
+		dprintf("get_portno: get ports of %s failed: %s\n",
 			brname, strerror(errno));
 		goto error;
 	}
@@ -144,7 +144,7 @@ static int old_get_bridge_info(const char *bridge, struct bridge_info *info)
 	__jiffies_to_tv(&info->ageing_time, i.ageing_time);
 	__jiffies_to_tv(&info->hello_timer_value, i.hello_timer_value);
 	__jiffies_to_tv(&info->tcn_timer_value, i.tcn_timer_value);
-	__jiffies_to_tv(&info->topology_change_timer_value, 
+	__jiffies_to_tv(&info->topology_change_timer_value,
 			i.topology_change_timer_value);
 	__jiffies_to_tv(&info->gc_timer_value, i.gc_timer_value);
 
@@ -180,7 +180,7 @@ int br_get_bridge_info(const char *bridge, struct bridge_info *info)
 	fetch_tv(path, "ageing_time", &info->ageing_time);
 	fetch_tv(path, "hello_timer", &info->hello_timer_value);
 	fetch_tv(path, "tcn_timer", &info->tcn_timer_value);
-	fetch_tv(path, "topology_change_timer", 
+	fetch_tv(path, "topology_change_timer",
 		 &info->topology_change_timer_value);;
 	fetch_tv(path, "gc_timer", &info->gc_timer_value);
 
@@ -207,15 +207,15 @@ static int old_get_port_info(const char *brname, const char *port,
 	index = get_portno(brname, port);
 	if (index < 0)
 		return errno;
-	
+
 	else {
 		struct ifreq ifr;
 		unsigned long args[4] = { BRCTL_GET_PORT_INFO,
 					   (unsigned long) &i, index, 0 };
-	
+
 		strlcpy(ifr.ifr_name, brname, IFNAMSIZ);
 		ifr.ifr_data = (char *) &args;
-		
+
 		if (ioctl(br_socket_fd, SIOCDEVPRIVATE, &ifr) < 0) {
 			dprintf("old can't get port %s(%d) info %s\n",
 				brname, index, strerror(errno));
@@ -233,9 +233,9 @@ static int old_get_port_info(const char *brname, const char *port,
 	info->state = i.state;
 	info->top_change_ack = i.top_change_ack;
 	info->config_pending = i.config_pending;
-	__jiffies_to_tv(&info->message_age_timer_value, 
+	__jiffies_to_tv(&info->message_age_timer_value,
 			i.message_age_timer_value);
-	__jiffies_to_tv(&info->forward_delay_timer_value, 
+	__jiffies_to_tv(&info->forward_delay_timer_value,
 			i.forward_delay_timer_value);
 	__jiffies_to_tv(&info->hold_timer_value, i.hold_timer_value);
 	info->hairpin_mode = 0;
@@ -245,7 +245,7 @@ static int old_get_port_info(const char *brname, const char *port,
 /*
  * Get information about port on bridge.
  */
-int br_get_port_info(const char *brname, const char *port, 
+int br_get_port_info(const char *brname, const char *port,
 		     struct port_info *info)
 {
 	DIR *d;
@@ -351,12 +351,12 @@ int br_set_stp_state(const char *br, int stp_state)
 
 int br_set_bridge_priority(const char *br, int bridge_priority)
 {
-	return br_set(br, "priority", bridge_priority, 
+	return br_set(br, "priority", bridge_priority,
 		      BRCTL_SET_BRIDGE_PRIORITY);
 }
 
-static int port_set(const char *bridge, const char *ifname, 
-		    const char *name, unsigned long value, 
+static int port_set(const char *bridge, const char *ifname,
+		    const char *name, unsigned long value,
 		    unsigned long oldcode)
 {
 	int ret;
@@ -372,7 +372,7 @@ static int port_set(const char *bridge, const char *ifname,
 		else {
 			struct ifreq ifr;
 			unsigned long args[4] = { oldcode, index, value, 0 };
-			
+
 			strlcpy(ifr.ifr_name, bridge, IFNAMSIZ);
 			ifr.ifr_data = (char *) &args;
 			ret = ioctl(br_socket_fd, SIOCDEVPRIVATE, &ifr);
@@ -397,7 +397,7 @@ int br_set_hairpin_mode(const char *bridge, const char *port, int hairpin_mode)
 	return port_set(bridge, port, "hairpin_mode", hairpin_mode, 0);
 }
 
-static inline void __copy_fdb(struct fdb_entry *ent, 
+static inline void __copy_fdb(struct fdb_entry *ent,
 			      const struct __fdb_entry *f)
 {
 	memcpy(ent->mac_addr, f->mac_addr, 6);
@@ -406,14 +406,14 @@ static inline void __copy_fdb(struct fdb_entry *ent,
 	__jiffies_to_tv(&ent->ageing_timer_value, f->ageing_timer_value);
 }
 
-int br_read_fdb(const char *bridge, struct fdb_entry *fdbs, 
+int br_read_fdb(const char *bridge, struct fdb_entry *fdbs,
 		unsigned long offset, int num)
 {
 	FILE *f;
 	int i, n;
 	struct __fdb_entry fe[num];
 	char path[SYSFS_PATH_MAX];
-	
+
 	/* open /sys/class/net/brXXX/brforward */
 	snprintf(path, SYSFS_PATH_MAX, SYSFS_CLASS_NET "%s/brforward", bridge);
 	f = fopen(path, "r");
@@ -442,7 +442,7 @@ int br_read_fdb(const char *bridge, struct fdb_entry *fdbs,
 		}
 	}
 
-	for (i = 0; i < n; i++) 
+	for (i = 0; i < n; i++)
 		__copy_fdb(fdbs+i, fe+i);
 
 	return n;
