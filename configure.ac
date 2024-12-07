@@ -2,6 +2,8 @@ dnl Process this file with autoconf to produce a configure script.
 AC_INIT([bridge-utils],[1.7])
 AC_CONFIG_HEADERS(libbridge/config.h)
 
+AM_MAINTAINER_MODE()
+
 AC_ARG_WITH([linux-headers],
     [AS_HELP_STRING([--with-linux-headers], [location of the linux headers to use])],
     [KERNEL_HEADERS=$withval],
